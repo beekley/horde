@@ -3,7 +3,7 @@ extends Node
 export(PackedScene) var mob_scene
 export(PackedScene) var tower_scene
 
-var towers_available: int = 1
+var towers_available: int = 1 setget towers_available_setter
 var sites_claimed: int = 0
 
 const TOWERS_PER_SITE: int = 3
@@ -26,7 +26,7 @@ func _input(event: InputEvent) -> void:
 		tower.connect("added_site", self, "add_site")
 		tower.position = event.position
 		add_child(tower)
-		towers_available -= 1
+		self.towers_available -= 1
 
 func _on_MobTimer_timeout():
 	# Spawn mobs proportional to number of sites.
@@ -50,4 +50,9 @@ func _on_MobTimer_timeout():
 
 func add_site() -> void:
 	sites_claimed += 1
-	towers_available += TOWERS_PER_SITE
+	# Use self so this triggers the setget function.
+	self.towers_available += TOWERS_PER_SITE
+
+func towers_available_setter(value) -> void:
+	$TowersAvailableLabel.set_text("Towers available to place: " + String(value))
+	towers_available = value

@@ -8,6 +8,9 @@ enum State {
 
 var state = State.AVAILABLE
 
+func _ready():
+	set_state(state)
+
 func set_state(new_state: int) -> void:
 	state = new_state
 	if state == State.UNAVAILABLE:

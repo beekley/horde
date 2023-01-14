@@ -21,8 +21,9 @@ func _on_AttackTimer_timeout() -> void:
 		var tower_bodies = get_overlapping_bodies()
 		for body in tower_bodies:
 			var site: Site = body
-			site.set_state(Site.State.CLAIMED)
-			emit_signal("added_site")
+			if site.state == Site.State.AVAILABLE:
+				site.set_state(Site.State.CLAIMED)
+				emit_signal("added_site")
 		has_checked_sites = true
 	# AttackArea is on layer 2 with Mobs.
 	var target_bodies: Array = $AttackArea.get_overlapping_bodies()

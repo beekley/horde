@@ -62,4 +62,10 @@ position = Vector2( 712, 312 )
 [node name="Site4" parent="." instance=ExtResource( 5 )]
 position = Vector2( 520, 216 )
 
+[node name="TowersAvailableLabel" type="Label" parent="."]
+margin_left = 9.0
+margin_top = 19.0
+margin_right = 49.0
+margin_bottom = 33.0
+
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
